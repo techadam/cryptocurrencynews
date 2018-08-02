@@ -1,0 +1,41 @@
+{% extends "crypto/base.html" %}
+
+{% block content %}
+    <div class="container">
+        {% if price.Response == "Error" %}
+            <br/>
+            <div class="alert alert-danger">
+                <h5>Sorry that symbol you entered doesn't exist</h5>
+            </div>
+        {% else %}
+            {% if flag is True %}
+                <br/>
+                <h4 class="text-success">Lookup result</h4>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">24h Low</th>
+                            <th scope="col">24h High</th>
+                            <th scope="col">Market Cap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key,value in price.DISPLAY.items %}
+                            <tr>
+                                <th>{{ key }}</th>
+                                <td>{{ value.USD.PRICE }}</td>
+                                <td>{{ value.USD.HIGHDAY }}</td>
+                                <td>{{ value.USD.LOWDAY }}</td>
+                                <td>{{ value.USD.MKTCAP }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>    
+                </table>
+            {% else %}
+                {{ price }}
+            {% endif %}
+        {% endif %}   
+    </div>
+{% endblock %}

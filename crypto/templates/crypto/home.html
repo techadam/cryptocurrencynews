@@ -3,8 +3,38 @@
 {% block content %}
 
 <div class="container">
-    <h1>Hello World</h1>
-    
+    <br/>
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Crypto News Network</h1>
+        <p class="lead">Everything you need to know about crypto currencies.</p>
+    </div>
+
+    <br/>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">24h Low</th>
+                <th scope="col">24h High</th>
+                <th scope="col">Market Cap</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in price.DISPLAY.items %}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>{{ value.USD.PRICE }}</td>
+                    <td>{{ value.USD.HIGHDAY }}</td>
+                    <td>{{ value.USD.LOWDAY }}</td>
+                    <td>{{ value.USD.MKTCAP }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>    
+    </table>
+    <br/>
+    <h3>All crypto currency news</h3>
+    <hr/>
     <div class="row">
         {% for news in api.Data %}
             <div class="col-sm-4" style="margin-bottom: 20px;">
@@ -20,7 +50,7 @@
             </div>
         {% endfor %}
         
-        {{ api.Data }}
+        <!--{{ api.Data }}-->
     </div>
 </div>
 
